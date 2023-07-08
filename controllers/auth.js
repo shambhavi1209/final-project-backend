@@ -58,6 +58,7 @@ exports.signUp = (req, res) => {
           `INSERT INTO users ( name,email,password) VALUES ('${user.name}', '${user.email}', '${user.password}')`
         )
         .then((data) => {
+          // IF THE USER IS SUCCESSFULLY SAVD IN OUR DB WE GENERATE TOKEN FOR THE USER TO SEND BACK TO THE BROWSER//
           console.log(data.rows);
           return res.status(200).json({
             mesaage: "User added sucessfully to database",
@@ -65,6 +66,7 @@ exports.signUp = (req, res) => {
           });
         })
         .catch((err) => {
+          // IF AN ERROR OCCUR WHILE SVINF THE USER TO THE DATABASE WE SEND THE DATABASE ERROR RESPONSE//
           res.status(500).json({
             error: "Database error occurred",
           });

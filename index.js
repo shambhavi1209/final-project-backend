@@ -2,6 +2,8 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const authRoutes = require("./routes/auth");
+const noteRoutes = require("./routes/notes");
+
 const client = require("./configs/db");
 require("dotenv").config();
 const app = express();
@@ -15,7 +17,7 @@ app.get("/", (req, res) => {
   res.status(200).send("Server is up and running");
 });
 app.use("/auth", authRoutes);
-// app.use("/notes",noteRoutes);
+app.use("/note", noteRoutes);
 
 client.connect((err) => {
   if (err) console.log("Error connecting database");
