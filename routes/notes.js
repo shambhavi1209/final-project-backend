@@ -1,13 +1,19 @@
 const express = require("express");
-const { addNote } = require("../controllers/notes");
+const {
+  addNote,
+  getAllNotes,
+  updateNote,
+  deleteNote,
+} = require("../controllers/notes");
 const { verifyToken } = require("../middlewares/authMiddlewares");
+const { handleNoteIdParam } = require("../middlewares/notesMiddlewares");
 const router = express.Router();
+router.param("noteId", handleNoteIdParam);
 
 router.post("/add", verifyToken, addNote);
-
-// router .delete ("/delete/:noteID",);
-// router.put("/update/:noteId",);
-// router.get("/getallnotes",);
+router.get("/getallnotes", verifyToken, getAllNotes);
+router.put("/update/:noteId", verifyToken, updateNote);
+router.delete("/delete/:noteId", verifyToken, deleteNote);
 
 // Middleware
 module.exports = router;
